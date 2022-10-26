@@ -17,6 +17,9 @@ require_once './assets/database/DAO/DAOBook.php';
 require_once './assets/database/model/Publisher.php';
 require_once './assets/database/DAO/DAOPublisher.php';
 
+require_once './assets/database/model/Cart.php';
+require_once './assets/database/DAO/DAOCart.php';
+
 // $obj  = new User(null, 'Carlos', 'carlos@outlook.com', '123', '111', '(33)98855-8899', 'user');
 // $dao = new DaoUser();
 // if ($dao->insertUser($obj)) echo 'Usuário inserido com sucesso!';
@@ -31,13 +34,20 @@ require_once './assets/database/DAO/DAOPublisher.php';
 //     echo 'Deu ruim';
 // }
 
-$obj = new Book(null, 'Java', 'Eduardo', 'livro sobre java', 299.99, '2002/08/09', 'didático', '00', 1);
-$dao = new DAOBook();
-if($dao->insertBook($obj)) {
-    echo 'Livro inserido com sucesso!';
-} else {
-    echo 'Deu ruim';
-}
+// $obj = new Book(null, 'Java', 'Eduardo', 'livro sobre java', 299.99, '2002/08/09', 'didático', '00', 1);
+// $dao = new DAOBook();
+// if($dao->insertBook($obj)) {
+//     echo 'Livro inserido com sucesso!';
+// } else {
+//     echo 'Deu ruim';
+// }
+
+$cart = new Cart(null, 'C#', '199.99', 1, 'C:/Users/eduma/Documents/Faculdade/6º Período/Desenvolvimento Web I/project/images/author-1.jpg' , '199.99', 1);
+$daoC = new DAOCart();
+
+if ($daoC->insertCart($cart)) echo 'Item adicionado ao carrinho!';
+else 'Deu ruim';
+
 ?>
 </body>
 </html>
