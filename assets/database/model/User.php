@@ -5,13 +5,17 @@ class User {
     private $email;
     private $password;
     private $cpf;
+    private $telefone;
+    private $userType;
 
-    public function __construct($id, $name, $email, $password, $cpf) {
+    public function __construct($id, $name, $email, $password, $cpf, $telefone, $userType) {
         $this->id = $id;
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
         $this->cpf = $cpf;
+        $this->telefone = $telefone;
+        $this->userType = $userType;
     }
 
     public function getId() {
@@ -56,6 +60,27 @@ class User {
     
     public function setCpf($cpf) {
         $this->cpf = $cpf;
+        return $this;
+    }
+
+    public function getTelefone() {
+        return $this->telefone;
+    }
+
+    public function setTelefone($telefone) {
+        $this->telefone = $telefone;
+        return $this;
+    }
+
+    public function getUserType()
+    {
+        return $this->userType;
+    }
+
+    public function setUserType($userType)
+    {
+        $this->userType = $userType;
+
         return $this;
     }
 }

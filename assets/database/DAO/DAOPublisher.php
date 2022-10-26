@@ -3,9 +3,11 @@ require_once './assets/database/connection/connection.php';
 
 class DaoPublisher {
     public function insertPublisher(Publisher $pub) {
-        $sql = 'INSERT INTO publisher (name) VALUES (?);';
+        $sql = 'INSERT INTO publisher (name, email, telefone) VALUES (?, ?, ?);';
         $pst = Connection::getPreparedStatement($sql);
         $pst->bindValue(1, $pub->getName());
+        $pst->bindValue(2, $pub->getEmail());
+        $pst->bindValue(3, $pub->getTelefone());
 
         if($pst->execute()) return true;
         else return false;
@@ -31,7 +33,7 @@ class DaoPublisher {
     }
 
     public function updateUser(Publisher $pub) {
-        $sql = $sql = 'UPDATE publisher SET name = ? WHERE id = ?';
+        $sql = $sql = 'UPDATE publisher SET name = ?, email = ?, telefone = ? WHERE id = ?';
         $pst = Connection::getPreparedStatement($sql);
         $pst->bindValue(1, $pub->getName());
 

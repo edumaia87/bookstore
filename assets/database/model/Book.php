@@ -1,5 +1,5 @@
 <?php
-class Books {
+class Book {
     private $id;
     private $title;
     private $author;
@@ -92,7 +92,7 @@ class Books {
         $this->isbn = $isbn;
         return $this;
     }
-
+    
     public function getPubId() {
         return $this->pubId;
     }

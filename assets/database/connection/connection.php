@@ -1,6 +1,6 @@
 <?php
 class Connection {
-    private static $dsn = 'mysql:host=127.0.0.1;dbname=mydb;port=3306';
+    private static $dsn = 'mysql:host=localhost;dbname=bookstore;port=3306';
     private static $user = 'root';
     private static $password = 'Iloverock123';
     private static $connection = null;

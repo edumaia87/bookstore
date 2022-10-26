@@ -3,12 +3,14 @@ require_once './assets/database/connection/connection.php';
 
 class DaoUser {
     public function insertUser(User $user) {
-        $sql = 'INSERT INTO user (name, email, password, cpf) VALUES (?, ?, ?, ?);';
+        $sql = 'INSERT INTO user (name, email, password, cpf, telefone, user_type) VALUES (?, ?, ?, ?, ?, ?);';
         $pst = Connection::getPreparedStatement($sql);
         $pst->bindValue(1, $user->getName());
         $pst->bindValue(2, $user->getEmail());
         $pst->bindValue(3, $user->getPassword());
         $pst->bindValue(4, $user->getCpf());
+        $pst->bindValue(5, $user->getTelefone());
+        $pst->bindValue(6, $user->getUserType());
 
         if($pst->execute()) return true;
         else return false;
