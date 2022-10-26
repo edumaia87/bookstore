@@ -8,9 +8,8 @@ class Book {
     private $publishedDate;
     private $genre;
     private $isbn;
-    private $pubId;
 
-    public function __construct($id, $title, $author, $description, $price, $publishedDate, $genre, $isbn, $pubId) {
+    public function __construct($id, $title, $author, $description, $price, $publishedDate, $genre, $isbn) {
         $this->id = $id;
         $this->title = $title;
         $this->author = $author;
@@ -19,7 +18,6 @@ class Book {
         $this->publishedDate = $publishedDate;
         $this->genre = $genre;
         $this->isbn = $isbn;
-        $this->pubId = $pubId;
     }
 
     public function getId() {
@@ -90,15 +88,6 @@ class Book {
 
     public function setIsbn($isbn) {
         $this->isbn = $isbn;
-        return $this;
-    }
-    
-    public function getPubId() {
-        return $this->pubId;
-    }
-
-    public function setPubId($pubId) {
-        $this->pubId = $pubId;
         return $this;
     }
 }

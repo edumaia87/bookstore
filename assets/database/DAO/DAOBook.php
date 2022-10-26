@@ -3,7 +3,7 @@ require_once './assets/database/connection/connection.php';
 
 class DaoBook {
     public function insertBook(Book $book) {
-        $sql = 'INSERT INTO book (title, author, description, price, published_date, genre, isbn, publisher_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?);';
+        $sql = 'INSERT INTO book (title, author, description, price, published_date, genre, isbn) VALUES (?, ?, ?, ?, ?, ?, ?, ?);';
         $pst = Connection::getPreparedStatement($sql);
         $pst->bindValue(1, $book->getTitle());
         $pst->bindValue(2, $book->getAuthor());
@@ -12,7 +12,6 @@ class DaoBook {
         $pst->bindValue(5, $book->getPublishedDate());
         $pst->bindValue(6, $book->getGenre());
         $pst->bindValue(7, $book->getIsbn());
-        $pst->bindValue(8, $book->getPubId());
 
         if($pst->execute()) return true;
         else return false;
@@ -45,9 +44,9 @@ class DaoBook {
         $pst->bindValue(2, $book->getAuthor());
         $pst->bindValue(3, $book->getDescription());
         $pst->bindValue(4, $book->getPrice());
-        $pst->bindValue(1, $book->getPublishedDate());
-        $pst->bindValue(2, $book->getGenre());
-        $pst->bindValue(3, $book->getIsbn());
+        $pst->bindValue(5, $book->getPublishedDate());
+        $pst->bindValue(6, $book->getGenre());
+        $pst->bindValue(7, $book->getIsbn());
 
         if($pst->execute()) return $pst->rowCount();
         else return false;

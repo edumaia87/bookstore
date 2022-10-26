@@ -36,19 +36,20 @@ class DaoUser {
     }
 
     public function updateUser(User $user) {
-        $sql = $sql = 'UPDATE user SET name = ?, email = ?, password = ? cpf = ? WHERE id = ?';
+        $sql = $sql = 'UPDATE user SET name = ?, email = ?, password = ? cpf = ? teelefone = ? WHERE id = ?';
         $pst = Connection::getPreparedStatement($sql);
         $pst->bindValue(1, $user->getName());
         $pst->bindValue(2, $user->getEmail());
         $pst->bindValue(3, $user->getPassword());
         $pst->bindValue(4, $user->getCpf());
+        $pst->bindValue(5, $user->getTelefone());
 
         if($pst->execute()) return $pst->rowCount();
         else return false;
     }
 
     public function deleteUser(User $user) {
-        $sql = 'DELETE FROM users WHERE id = ?;';
+        $sql = 'DELETE FROM user WHERE id = ?;';
         $pst = Connection::getPreparedStatement($sql);
         $pst->bindValue(1, $user->getId());
 

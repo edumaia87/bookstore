@@ -32,7 +32,7 @@ class DaoPublisher {
         return $listPublisher;
     }
 
-    public function updateUser(Publisher $pub) {
+    public function updatePublisher(Publisher $pub) {
         $sql = $sql = 'UPDATE publisher SET name = ?, email = ?, telefone = ? WHERE id = ?';
         $pst = Connection::getPreparedStatement($sql);
         $pst->bindValue(1, $pub->getName());
@@ -41,7 +41,7 @@ class DaoPublisher {
         else return false;
     }
 
-    public function deleteUser(Publisher $pub) {
+    public function deletePublisher(Publisher $pub) {
         $sql = 'DELETE FROM publisher WHERE id = ?;';
         $pst = Connection::getPreparedStatement($sql);
         $pst->bindValue(1, $pub->getId());

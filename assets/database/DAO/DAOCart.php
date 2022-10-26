@@ -1,5 +1,4 @@
 <?php
-
 require_once './assets/database/connection/connection.php';
 
 class DAOCart {
@@ -12,6 +11,9 @@ class DAOCart {
         $pst->bindValue(4, $cart->getImage());
         $pst->bindValue(5, $cart->getTotal());
         $pst->bindValue(6, $cart->getUserId());
+
+        if($pst->execute()) return true;
+        else return false;
     }
 
     /*public function listCart() {
@@ -36,7 +38,7 @@ class DAOCart {
     }
 
     public function updateCart(Cart $cart) {
-        $sql = 'UPDATE cart SET quantity = ?, total = ? WHERE user_id = ?;';
+        $sql = 'UPDATE cart SET quantity = ?, total = ? WHERE id = ?;';
         $pst = Connection::getPreparedStatement($sql);
         $pst->bindValue(1, $cart->getQuantity());
         $pst->bindValue(2, $cart->getTotal());
@@ -45,9 +47,8 @@ class DAOCart {
         else return false;
     }
 
-
     public function deleteCart(Cart $cart) {
-        $sql = 'DELETE FROM cart WHERE user_id = ?;';
+        $sql = 'DELETE FROM cart WHERE id = ?;';
         $pst = Connection::getPreparedStatement($sql);
         $pst->bindValue(1, $cart->getUserId());
 
