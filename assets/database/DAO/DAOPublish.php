@@ -3,14 +3,18 @@ require_once './assets/database/connection/connection.php';
 
 class DaoPublish {
     public function insertPublish(Publish $publish) {
-        $sql = 'INSERT INTO publish (id, publisher_id, book_id) VALUES (?, ?, ?)';
-        $pst = Connection::getPreparedStatement($sql);
-        $pst->bindValue(1, $publish->getId());
-        $pst->bindValue(2, $publish->getPublisherId());
-        $pst->bindValue(3, $publish->getBookId());
+        try {
+            $sql = 'INSERT INTO publish (id, publisher_id, book_id) VALUES (?, ?, ?)';
+            $pst = Connection::getPreparedStatement($sql);
+            $pst->bindValue(1, $publish->getId());
+            $pst->bindValue(2, $publish->getPublisherId());
+            $pst->bindValue(3, $publish->getBookId());
 
-        if($pst->execute()) return true;
-        else return false;
+            if($pst->execute()) return true;
+            else return false;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 
     public function listPublish() {
@@ -34,19 +38,27 @@ class DaoPublish {
     }
 
     /*public function updatePublish(Publish $publish) {
-        $sql = 'UPDATE publish SET WHERE id = ?';
-        $pst = Connection::getPreparedStatement($sql);
+        try {
+            $sql = 'UPDATE publish SET WHERE id = ?';
+            $pst = Connection::getPreparedStatement($sql);
 
-        if($pst->execute()) return $pst->rowCount();
-        else return false;
+            if($pst->execute()) return $pst->rowCount();
+            else return false;
+        } catch (Exception $e) {
+            return false;
+        }
     }*/
 
     public function deletePublish(User $publish) {
-        $sql = 'DELETE FROM publish WHERE id = ?;';
-        $pst = Connection::getPreparedStatement($sql);
-        
-        $pst->bindValue(1, $publish->getId());
-        if ($pst->execute()) return $pst->rowCount();
-        else return false;
+        try {
+            $sql = 'DELETE FROM publish WHERE id = ?;';
+            $pst = Connection::getPreparedStatement($sql);
+            
+            $pst->bindValue(1, $publish->getId());
+            if ($pst->execute()) return $pst->rowCount();
+            else return false;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 }

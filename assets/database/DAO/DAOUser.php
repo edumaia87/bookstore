@@ -3,17 +3,21 @@ require_once './assets/database/connection/connection.php';
 
 class DaoUser {
     public function insertUser(User $user) {
-        $sql = 'INSERT INTO user (name, email, password, cpf, telefone, user_type) VALUES (?, ?, ?, ?, ?, ?);';
-        $pst = Connection::getPreparedStatement($sql);
-        $pst->bindValue(1, $user->getName());
-        $pst->bindValue(2, $user->getEmail());
-        $pst->bindValue(3, $user->getPassword());
-        $pst->bindValue(4, $user->getCpf());
-        $pst->bindValue(5, $user->getTelefone());
-        $pst->bindValue(6, $user->getUserType());
+        try {
+            $sql = 'INSERT INTO user (name, email, password, cpf, telefone, user_type) VALUES (?, ?, ?, ?, ?, ?);';
+            $pst = Connection::getPreparedStatement($sql);
+            $pst->bindValue(1, $user->getName());
+            $pst->bindValue(2, $user->getEmail());
+            $pst->bindValue(3, $user->getPassword());
+            $pst->bindValue(4, $user->getCpf());
+            $pst->bindValue(5, $user->getTelefone());
+            $pst->bindValue(6, $user->getUserType());
 
-        if($pst->execute()) return true;
-        else return false;
+            if($pst->execute()) return true;
+            else return false;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function listUser() {
@@ -36,24 +40,32 @@ class DaoUser {
     }
 
     public function updateUser(User $user) {
-        $sql = $sql = 'UPDATE user SET name = ?, email = ?, password = ? cpf = ? teelefone = ? WHERE id = ?';
-        $pst = Connection::getPreparedStatement($sql);
-        $pst->bindValue(1, $user->getName());
-        $pst->bindValue(2, $user->getEmail());
-        $pst->bindValue(3, $user->getPassword());
-        $pst->bindValue(4, $user->getCpf());
-        $pst->bindValue(5, $user->getTelefone());
+        try {
+            $sql = $sql = 'UPDATE user SET name = ?, email = ?, password = ? cpf = ? teelefone = ? WHERE id = ?';
+            $pst = Connection::getPreparedStatement($sql);
+            $pst->bindValue(1, $user->getName());
+            $pst->bindValue(2, $user->getEmail());
+            $pst->bindValue(3, $user->getPassword());
+            $pst->bindValue(4, $user->getCpf());
+            $pst->bindValue(5, $user->getTelefone());
 
-        if($pst->execute()) return $pst->rowCount();
-        else return false;
+            if($pst->execute()) return $pst->rowCount();
+            else return false;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function deleteUser(User $user) {
-        $sql = 'DELETE FROM user WHERE id = ?;';
-        $pst = Connection::getPreparedStatement($sql);
-        $pst->bindValue(1, $user->getId());
+        try {
+            $sql = 'DELETE FROM user WHERE id = ?;';
+            $pst = Connection::getPreparedStatement($sql);
+            $pst->bindValue(1, $user->getId());
 
-        if($pst->execute()) return $pst->rowCount();
-        else return false;
+            if($pst->execute()) return $pst->rowCount();
+            else return false;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 }

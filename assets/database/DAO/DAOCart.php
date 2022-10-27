@@ -3,17 +3,21 @@ require_once './assets/database/connection/connection.php';
 
 class DAOCart {
     public function insertCart(Cart $cart) {
-        $sql = 'INSERT INTO cart (name, price, quantity, image, total, user_id) VALUES (?, ?, ?, ?, ?, ?);';
-        $pst = Connection::getPreparedStatement($sql);
-        $pst->bindValue(1, $cart->getName());
-        $pst->bindValue(2, $cart->getPrice());
-        $pst->bindValue(3, $cart->getQuantity());
-        $pst->bindValue(4, $cart->getImage());
-        $pst->bindValue(5, $cart->getTotal());
-        $pst->bindValue(6, $cart->getUserId());
+        try {
+            $sql = 'INSERT INTO cart (name, price, quantity, image, total, user_id) VALUES (?, ?, ?, ?, ?, ?);';
+            $pst = Connection::getPreparedStatement($sql);
+            $pst->bindValue(1, $cart->getName());
+            $pst->bindValue(2, $cart->getPrice());
+            $pst->bindValue(3, $cart->getQuantity());
+            $pst->bindValue(4, $cart->getImage());
+            $pst->bindValue(5, $cart->getTotal());
+            $pst->bindValue(6, $cart->getUserId());
 
-        if($pst->execute()) return true;
-        else return false;
+            if($pst->execute()) return true;
+            else return false;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     /*public function listCart() {
@@ -38,21 +42,29 @@ class DAOCart {
     }
 
     public function updateCart(Cart $cart) {
-        $sql = 'UPDATE cart SET quantity = ?, total = ? WHERE id = ?;';
-        $pst = Connection::getPreparedStatement($sql);
-        $pst->bindValue(1, $cart->getQuantity());
-        $pst->bindValue(2, $cart->getTotal());
+        try {
+            $sql = 'UPDATE cart SET quantity = ?, total = ? WHERE id = ?;';
+            $pst = Connection::getPreparedStatement($sql);
+            $pst->bindValue(1, $cart->getQuantity());
+            $pst->bindValue(2, $cart->getTotal());
 
-        if($pst->execute()) return $pst->rowCount();
-        else return false;
+            if($pst->execute()) return $pst->rowCount();
+            else return false;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function deleteCart(Cart $cart) {
-        $sql = 'DELETE FROM cart WHERE id = ?;';
-        $pst = Connection::getPreparedStatement($sql);
-        $pst->bindValue(1, $cart->getUserId());
+        try {
+            $sql = 'DELETE FROM cart WHERE id = ?;';
+            $pst = Connection::getPreparedStatement($sql);
+            $pst->bindValue(1, $cart->getUserId());
 
-        if($pst->execute()) return $pst->rowCount();
-        else return false;
+            if($pst->execute()) return $pst->rowCount();
+            else return false;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 }
