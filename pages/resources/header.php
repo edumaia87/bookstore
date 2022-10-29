@@ -9,7 +9,7 @@
 
         <div class="icons">
             <div id="search-btn" class="fas fa-search"></div>
-            <div id="login-btn" class="fas fa-user"></div>
+            <a href="login.php"><div id="login-btn" class="fas fa-user"></div></a>
             <a href="#" class="fas fa-heart"></a>
             <a href="#" class="fas fa-shopping-cart"></a>
 
